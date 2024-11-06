@@ -1,0 +1,142 @@
+﻿
+<aside class="left-sidebar" data-sidebarbg="skin6"style="padding-top: 0px !important">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+               <!-- Sidebar navigation-->
+               <nav class="sidebar-nav">
+                  <!-- <nav class="sidebar-nav"> -->
+                  <ul id="sidebarnav">
+                     <!--Start logo-->
+                     <div class="row"id="logoid">
+                        @*<img src="/images/users/log-12.png"height="100%"width="100%" >*@
+                         <img onclick="window.location.href = '/';" src="/images/users/cow-17-new.png" height="100px">
+                     </div>
+                     <!-- End logo-->
+                     <hr style="margin-top: -3%;">
+                     <!--Sidebar dropdown -->
+                      <div id="fancytree"></div>
+                      <div id="dashboard-attribute" style=""> 
+                        @if (User.IsInRole("Client") == true)
+                        {
+                        <div class="form-group">
+
+                            <select id="brand" asp-items="@((List<SelectListItem>)ViewData["Brands"])" class="form-control-sm" style="width: 81%;margin-left: 9%;margin-bottom: 4%;    border-radius: unset;">
+                                @*<option selected>Select Brand  &emsp; &emsp; &emsp; &emsp;&nbsp;&nbsp; &#9660; </option>*@
+                            </select>
+
+                            <div class="form-group mt-1">
+                                <input type="text" id="date-range" class="form-control-sm" style="width: 81%;margin-left: 9%; border-radius: unset;margin-bottom: 4%;"/>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div id="display-dashboard-list" style="display:none">
+                            <div style="margin-left: 9%;">
+                                <p style="color: #125a31;font-weight: 900;font-size: 14px;">
+                                    Raw : <span id="raw-imagesforsidebar">28</span> Images  <br>
+                                    Completed : <span id="completed-imagesforsidebar">28</span> Images <br>
+                                    Rejected : <span id="rejected-imagesforsidebar">28</span> Images <br>
+                                    Pending: <span id="pending-imagesforsidebar">28</span> Images 
+                                </p>
+                            </div>
+                        </div>
+                       }
+                </div>
+                  </ul>
+               </nav>
+               <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+         </aside>
+        <div class="row"style="background-color:#eef5f9">            
+            <div class="col-md-9" >
+                <nav class="navbar navbar-expand-lg"style="font-size:21px;float:right;font-weight:500">
+                      
+                      <button style="background-color: silver" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                          @if (User.IsInRole("Client") == true)
+                            {
+                              <a class="nav-item nav-link active" href="/" onclick="ShowSidebarMenu('dashboard')">Dashboard</a>
+                              <a class="nav-item nav-link " href="/Images" onclick="ShowSidebarMenu('images')" >Images</a>
+                            }
+                             @if(User.IsInRole("SuperAdmin")==true)
+                            {
+
+                                  <a class="nav-item nav-link active" href="/Issues/Index" onclick="ShowSidebarMenu('issues')">Issues</a>
+                                  <a class="nav-item nav-link " href="/Account/UserList" onclick="ShowSidebarMenu('users')" >Users</a>
+                                  <a class="nav-item nav-link " href="/Client/Index" onclick="ShowSidebarMenu('clients')">Clients</a>
+                                  <a class="nav-item nav-link " href="/Activity/Index" onclick="ShowSidebarMenu('activity')" >Acitivty</a>
+                                  <a class="nav-item nav-link " href="/Home/Clear" onclick="ShowSidebarMenu('clear')" >Clear</a>
+                                
+
+                            }
+                          
+                        </div>
+                      </div>
+                    </nav>
+            </div>
+            <!--Tool box-->
+            <div class="col-md">
+               <div class="row">
+                  <div class="col-4 col-md"style="margin-top:3%">
+                     <img title="Pen Tool" class="paint-tool" src="/images/users/pentool-08.png"style="display:none; margin-top: -3%;">
+                  </div>
+                  @*<div class="col-4 col-md"style="margin-top:3%">
+                     <img src="/images/users/text-09.png">
+                  </div>*@
+                  <div class="col-4 col-md"style="margin-top:3%">
+                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     <img src="/images/users/1.png"style="margin-left: -32%;" alt="user" class="rounded-circle" width="31">                      
+                     </a>
+                     
+                     <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-success" href="javascript:void(0)" ><i class="bi bi-person-circle"></i> @User.Identity.Name</a>
+                            
+@*                        <a class="dropdown-item" href="/" onclick="ShowSidebarMenu('dashboard')"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                         
+                       
+                        @if(User.IsInRole("SuperAdmin")==true)
+                        {
+                             <a class="dropdown-item" href="/Issues/Index" onclick="ShowSidebarMenu('issues')"><i class="bi bi-card-list"></i> Issues</a>
+                             <a class="dropdown-item" href="/Account/UserList" onclick="ShowSidebarMenu('users')"><i class="bi bi-people-fill"></i> Users</a>
+                             <a class="dropdown-item" href="/Client/Index" onclick="ShowSidebarMenu('clients')"><i class="bi bi-person-lines-fill"></i> Clients</a>
+                             <a class="dropdown-item" href="/Activity/Index" onclick="ShowSidebarMenu('activity')"><i class="bi bi-activity"></i> Acitivty</a>
+                             <a class="dropdown-item" href="/Home/Clear" onclick="ShowSidebarMenu('clear')"><i class="bi bi-trash"></i> Clear</a>
+
+                        }
+                        else
+                        {
+                             <a class="dropdown-item" href="/Images" onclick="ShowSidebarMenu('images')"><i class="bi bi-card-image" ></i> Images</a>
+                        }*@
+
+                        <a class="dropdown-item text-danger" href="/Account/Logout"><i class="bi bi-person-x-fill"></i> Logout</a>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+        <script>
+        function ShowSidebarMenu(menuName)
+        {
+            if(menuName=="images")
+            {
+                $("#dashboard-attribute").hide();
+                $("#fancytree").show();
+            }
+            else if(menuName=="dashboard"){
+                $("#dashboard-attribute").css("display","block");
+                $("#fancytree").css("display","none");
+            }
+            else
+            {
+                $("#dashboard-attribute").css("display","none");
+                $("#fancytree").css("display","none");
+            }
+        }
+        </script>
+    
+         
+         

@@ -1,0 +1,226 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <style>
+        body{
+            background-color:#f2f3f5;
+        }
+    </style>
+   
+}
+
+
+        <div class="row" style="margin-top:1%">
+
+
+                  <!--Start Middle section-->
+                    <div class="col-md-12" >
+                      <div class="d-flex flex-row">
+                        <div class="p-2">
+                         <h5 style="color: #125a31;"> Dashboard </h5></div>
+                       
+                     <div class="p-2" >
+                     <hr id="lineipad" style="width: 960px;"></div>
+
+                     </div>
+
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+
+            <div class="col-md-3">
+                <p style="text-align: center;font-weight: 800;color: #6e6d70;font-size: 20px;margin-bottom: 2%;margin-right: 14%;">Raw</p>
+
+                <div class="square1">
+                    <div class="row">
+                    <div class="col-md-6">
+                        <img src="/images/users/raw1(1).png"class="rounded mx-auto d-block"style="margin-top:40%">
+                    </div>
+                    <div class="col-md-6">
+                        <p style="font-weight: 900;margin-top: 45%;"><span  style="font-size: 36px;color: #446eb5" id="raw-images">0  </span><br> images</p>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                <p style="text-align: center;font-weight: 800;color: #6e6d70;font-size: 20px;margin-bottom: 2%;margin-right: 14%;">Completed</p>
+
+                <div class="square2">
+                  <div class="row">
+                    <div class="col-md-6">
+                        <img src="/images/users/completed1.png"class="rounded mx-auto d-block" style="margin-top:40%">
+                    </div>
+                    <div class="col-md-6">
+                        <p style="font-weight: 900;margin-top: 45%;"><span style="font-size: 36px;color: #6cad7d" id="completed-images">0  </span><br> images</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+
+            </div>
+          </div>
+
+        <br>
+
+      <div class="row">
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-3">
+            <p style="text-align: center;font-weight: 800;color: #6e6d70;font-size: 20px;margin-bottom: 2%;margin-right: 14%;">Rejected</p>
+
+            <div class="square3">
+              <div class="row">
+                <div class="col-md-6">
+                    <img src="/images/users/rejected1.png" class="rounded mx-auto d-block"style="margin-top:40%">
+                </div>
+                <div class="col-md-6">
+                    <p style="font-weight: 900;margin-top: 45%;"><span style="font-size: 36px;color: #f4825c" id="rejected-images">0 </span> <br>images</p>
+                </div>
+            </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+            <p style="text-align: center;font-weight: 800;color: #6e6d70;font-size: 20px;margin-bottom: 2%;margin-right: 14%;">Pending</p>
+
+            <div class="square4">
+              <div class="row">
+                <div class="col-md-6">
+                    <img src="/images/users/pending1.png"class="rounded mx-auto d-block"style="margin-top:40%">
+                </div>
+                <div class="col-md-6">
+                    <p style="font-weight: 900;margin-top: 45%;"><span style="font-size: 36px;color: #5c52a2"  id="pending-images">0  </span><br> images</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+
+        </div>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="row">
+
+          <div class="col-md-5">
+
+          </div>
+
+          <div class="col-md-2">
+              <button onclick="location.href = '/Images';" style="color: #125a31;font-weight: 600;padding: 4px 15px;background-color: white;border: none;">Go To Images →</button>
+          </div>
+
+          <div class="col-md-5">
+
+          </div>
+          
+      </div>
+
+      </div>
+
+
+      </div>
+
+       <!--End Middle section-->
+
+  
+
+             <!--End of  right section-->
+
+
+
+@section scripts{
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script>
+    
+
+        function dateFilteredData(dateRange, brand){
+           $("#display-dashboard-list").css("display","block");
+            console.log(dateRange);
+            
+            $.ajax({
+            url: `/Home/GetReportData?dateRange=${dateRange}&brand=${brand}`,
+            method: 'GET',
+            success: function (data) {
+                if (data.isSuccess) {
+                    //$("#raw-images").text(data.result.raw + " image" + (data.result.raw > 1 ? "s" : "") );
+                    //$("#completed-images").text(data.result.completed + " image" + (data.result.completed > 1 ? "s" : "") );
+                    //$("#pending-images").text(data.result.pending + " image" + (data.result.pending > 1 ? "s" : "") );
+                    //$("#rejected-images").text(data.result.rejected + " image" + (data.result.rejected > 1 ? "s" : "") );
+                    $("#raw-images").text(data.result.raw);
+                    $("#completed-images").text(data.result.completed );
+                    $("#pending-images").text(data.result.pending); 
+                    $("#rejected-images").text(data.result.rejected);
+                    $("#raw-imagesforsidebar").text(data.result.raw);
+                    $("#completed-imagesforsidebar").text(data.result.completed );
+                    $("#pending-imagesforsidebar").text(data.result.pending); 
+                    $("#rejected-imagesforsidebar").text(data.result.rejected);
+                    
+                }
+            },
+            error: function (res) {
+
+            }
+        });
+        }
+
+        $(document).ready(function(){
+            var winHeight = $(window).height();
+            winHeight = winHeight - 150;
+
+            $(".container").css("height", winHeight);
+            
+
+            $("#date-range").daterangepicker({
+                "applyButtonClasses" : 'btn-primary',
+                "opens": 'left',
+                "startDate": moment().subtract(30, "days"),
+                "endDate": moment(),
+                "autoApply": true,
+                "maxDate": moment(),
+                "locale": {
+                    "format": 'DD MMM YYYY',
+                    "applyLabel": "Apply",
+                }
+            });
+
+            $("#date-range").html(moment().format("DD MMM YYYY") + " - " + moment().format("DD MMM YYYY"));
+
+            $('#date-range').on('apply.daterangepicker', function (ev, picker) {
+                let daterangeInputValue = $("#date-range").val();
+                let brand = $("#brand").val();
+
+                dateFilteredData(daterangeInputValue, brand);
+            });
+
+            $("#brand").on("change", function(){
+                let daterangeInputValue = $("#date-range").val();
+                let brand = $("#brand").val();
+
+                dateFilteredData(daterangeInputValue, brand);
+            });
+
+            dateFilteredData($("#date-range").val(), $("#brand").val());
+        });
+
+       
+    </script>
+
+}
+

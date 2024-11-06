@@ -1,0 +1,12 @@
+﻿@model  IEnumerable<CutOutWiz.Data.DriveImage>
+
+<div class="row">
+
+    @foreach(var item in Model)
+    {
+    <div class="col-3">
+        <img src="@item.Data">
+    </div>
+    }    
+    
+</div>

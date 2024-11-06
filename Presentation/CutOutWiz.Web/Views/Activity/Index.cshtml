@@ -1,0 +1,97 @@
+﻿@using CutOutWiz.Data.Models.Log
+@model LogModel
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+}
+
+
+ <style>
+        body{
+            background-color:#f2f3f5;
+        }
+    </style>
+
+ <div class="row" style="margin-top:1%">
+       <div class="col-md-12" >
+        <div class="d-flex flex-row">
+        <div class="p-2">
+            <h5 style="color: #125a31;"> Activity Details </h5></div>
+                       
+        <div class="p-2" >
+        <hr id="lineipad" style="width: 960px;"></div>
+
+        </div>
+
+<div class="section">
+    <div class="row">
+        <div class="col-12">
+            <form asp-controller="Activity" asp-action="Index" method="post" class="d-inline-flex">
+
+                <div class="form-group d-inline-flex">
+                    <input id="activity-date-range" type="text" class="form-control" asp-for="DateRange"/>
+                </div>
+
+                <div class="form-group d-inline-flex">
+                    <select class="form-control" asp-for="Username" asp-items="@((List<SelectListItem>)ViewData["users"])">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="form-control"/>
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    Log History
+                </div>
+                <div class="card-body" style="height: calc(100vh - 200px); overflow-y: scroll;">
+
+                    @foreach(var log in Model.Logs)
+                    {
+                        <p>@log</p>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+ </div>
+
+@section scripts{
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script>
+        
+        $(document).ready(function(){
+            
+            $("#activity-date-range").daterangepicker({
+                "applyButtonClasses" : 'btn-primary',
+                "opens": 'left',
+                "autoApply": true,
+                "maxDate": moment(),
+                "locale": {
+                    "format": 'DD MMM YYYY',
+                    "applyLabel": "Apply",
+                }
+            });
+
+        });
+
+       
+    </script>
+
+}

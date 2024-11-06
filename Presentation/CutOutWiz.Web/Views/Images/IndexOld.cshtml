@@ -1,0 +1,39 @@
+﻿ @section Styles {
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.38.0/skin-lion/ui.fancytree.min.css">
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <div id="fancytree"></div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card">
+            <div class="card-header">
+               <input type="checkbox" class="select-all-img" name="select-all-img" id="selectallimage"/> Images
+            </div>
+            <div class="card-body">
+                <div id="image-container">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                Feedback
+            </div>
+            <div class="card-body comment-body">
+                <textarea name="comment" id="comment" class="form-control" placeholder="write your instruction here.."></textarea>
+                @*<input type="file" class="form-control mt-2" name="attachment" id="attachment"/>*@
+                <input type="button" class="btn btn-info mt-2" name="Accept" id="btnAccept" value="Accept"/>
+                <input type="button" class="btn btn-danger mt-2" name="Reject" id="btnReject" value="Reject"/>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

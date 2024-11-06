@@ -1,0 +1,74 @@
+﻿@model CutOutWiz.Data.Company
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<hr />
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+             <div class="col-md-6">
+                  <h3 style="float: left;">Create new Client</h3>
+            </div>
+             <div class="col-md-6">
+                  <a asp-action="Index" class="btn btn-sm btn-success" style="text-decoration: none; float: right;"><i class="bi bi-arrow-left"></i> Back to Clientlist</a>
+            </div>
+        </div>
+      
+    </div>
+    <div class="card-body">
+        <div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mt-2 mb-1">
+                <label  class="control-label">Company Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Company name." />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2 mb-1">
+                <label  class="control-label">Email Addres</label>
+                <input asp-for="Email" class="form-control" placeholder="Enter Email Address." />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2 mb-1">
+                <label  class="control-label">Phone No.</label>
+                <input asp-for="Phone" class="form-control" placeholder="Enter Phone no." />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+             <div class="form-group mt-2 mb-1">
+                <label  class="control-label">Root Folder Path</label>
+                <input asp-for="FileRootFolderPath" class="form-control" placeholder="Enter root folder path." />
+                <span asp-validation-for="FileRootFolderPath" class="text-danger"></span>
+            </div>
+            @*<div class="form-group mt-2 mb-1">
+                <input type="checkbox" asp-for="Status"/> Active
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success btn-block" />
+            </div>
+            @if(!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                 <span class="text-danger">    
+                   <div class="bg-danger text-white p-1 m-1 form-control"> @ViewBag.Message </div> 
+                </span>        
+            }
+        </form>
+    </div>
+</div>
+    </div>
+  </div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

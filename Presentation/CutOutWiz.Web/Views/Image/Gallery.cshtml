@@ -1,0 +1,96 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@section styles{
+
+    <link rel="stylesheet" href="~/css/mibreitGallery.css" />
+
+    <style>
+        .content-slideshow {
+          position: relative;
+          margin: 0;
+          top: 2px;
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+          height: 40rem;
+          overflow: hidden;
+        }
+    </style>
+}
+
+
+<div id="full-gallery" class="content-slideshow">
+  <div class="mibreit-imageElement" style="opacity:0">
+    <img src="~/images/gallery/image-placeholder-transparent.png" 
+         data-src="https://dprp12nc61odv.cloudfront.net/fit-in/300x0/Client%201/Brand%201/17-Jan-2022/For%20Approval/A163614-ADI-Catalog-FTW/image_2609038_20e4906f.png" 
+         data-title="Image 1" 
+         alt="Image 2"
+         width=1280 height=853/>
+    <h3>Image 1</h3>
+  </div>
+  <div class="mibreit-imageElement" style="opacity:0">
+    <img src="~/images/gallery/image-placeholder-transparent.png" 
+         data-src="https://dprp12nc61odv.cloudfront.net/fit-in/300x0/Client%201/Brand%201/17-Jan-2022/For%20Approval/A163614-ADI-Catalog-FTW/image_2609038_20e4906f.png" 
+         data-title="Image 2" 
+         alt="Image 2" 
+         width=1280 height=853/>
+    <h3>Image 2</h3>
+  </div>
+  <div class="mibreit-imageElement" style="opacity:0">
+    <img src="~/images/gallery/image-placeholder-transparent.png" 
+         data-src="https://dprp12nc61odv.cloudfront.net/fit-in/300x0/Client%201/Brand%201/17-Jan-2022/For%20Approval/A163614-ADI-Catalog-FTW/image_2609038_20e4906f.png" 
+         data-title="Image 3" 
+         alt="Image 3" 
+         width=1280 height=853/>
+    <h3>Image 3</h3>
+  </div>
+</div>
+
+<div class="mibreit-thumbview">
+  <div class="mibreit-thumbElement">
+    <img src="~/images/gallery/image-placeholder-transparent.png" data-src="https://dprp12nc61odv.cloudfront.net/fit-in/300x0/Client%201/Brand%201/17-Jan-2022/For%20Approval/A163614-ADI-Catalog-FTW/image_2609038_20e4906f.png" width="100" height="80" alt="thumbnail" /> 
+  </div>
+  <div class="mibreit-thumbElement">
+    <img src="~/images/gallery/image-placeholder-transparent.png" data-src="https://dprp12nc61odv.cloudfront.net/fit-in/300x0/Client%201/Brand%201/17-Jan-2022/For%20Approval/A163614-ADI-Catalog-FTW/image_2609038_20e4906f.png" width="100" height="80" alt="thumbnail" /> 
+  </div>
+  <div class="mibreit-thumbElement">
+    <img src="~/images/gallery/image-placeholder-transparent.png" data-src="https://dprp12nc61odv.cloudfront.net/fit-in/300x0/Client%201/Brand%201/17-Jan-2022/For%20Approval/A163614-ADI-Catalog-FTW/image_2609038_20e4906f.png" width="100" height="80" alt="thumbnail" /> 
+  </div>
+</div>
+
+<h3 id="full-gallery-title" class="mibreit-slideshow-title"></h3>
+
+@section scripts{
+    <script src="~/js/mibreitGallery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function(){
+            mibreitGallery.createGallery({
+
+              // slideshow container
+              slideshowContainer: "#full-gallery",
+
+              // thumb view container
+              thumbviewContainer: ".mibreit-thumbview",
+
+              // image title container
+              titleContainer: "#full-gallery-title",
+
+              // determine whether to enable fullscreen mode
+              allowFullscreen: !0,
+
+              // image preloader
+              preloadLeftNr: 2,
+              preloadRightNr: 3
+
+            })
+        });
+
+    </script>
+}
+

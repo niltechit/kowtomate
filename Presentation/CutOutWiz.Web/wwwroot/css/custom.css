@@ -1,0 +1,135 @@
+﻿ul.fancytree-container {
+    border: none !important;
+}
+
+#fancytree {
+    overflow: auto !important;
+    border: 1px gray;
+}
+
+.img-selector-small-view {
+    float: left;
+    margin-top: 3px;
+    margin-right: 3px;
+}
+
+.thum-img-container{
+   position:relative;
+}
+
+#galleryImgPreviewContainer .img-selector {
+    top: 0px;
+    left: 3px;
+    position: absolute;
+    z-index: 25;
+}
+
+.carousel-indicators
+{
+    margin-top:10px;
+    margin-bottom:10px;
+    position:unset;
+}
+
+.img-label {
+    overflow-wrap: anywhere;
+}
+
+.img-chkbox-holder {
+    font-size: 12px;
+    display: flex;
+}
+
+.file-info-line {
+    display: flex;  
+}
+
+.file-info-line span {
+   overflow-wrap: anywhere;
+   margin-left:2px;
+}
+
+.thum-img-container .active
+{
+    border: 1px solid red !important;
+}
+
+.thum-img-container img {
+    border: 1px solid none;
+}
+
+.page-breadcrumb {
+    padding: 0px 10px 0 10px !important;
+}
+
+.comment-body
+{
+    padding-top: 8px !important;
+}
+
+.browse-instruction {
+    height: 1000px;
+    padding-top: 30%;
+    padding-left: 40%;
+    font-size: 25px;
+    text-align: center;
+}
+
+.image-rgt {
+    background-size: contain !important;
+}
+
+.carousel-item img
+{
+    /*height:100% !important;*/
+}
+
+.carousel-item {
+    height:100% !important;
+}
+
+#galleryImgPreviewContainer
+{
+    margin-left:10px !important;
+    text-align:center;
+}
+
+.gallery-slider-container {
+    height: 100% !important;
+    width: auto !important;
+}
+
+.modal-content {
+    border: 1px solid #cccccc !important;
+}
+
+.dance {
+    animation-name: dance;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    font-size:400px;
+}
+
+@keyframes dance {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}

@@ -1,0 +1,174 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+ <style>
+        body{
+            background-color:#f2f3f5;
+        }
+    </style>
+
+ <div class="row" style="margin-top:1%">
+       <div class="col-md-12" >
+        <div class="d-flex flex-row">
+        <div class="p-2">
+            <h5 style="color: #125a31;"> Clear folders & data </h5></div>
+                       
+        <div class="p-2" >
+        <hr id="lineipad" style="width: 960px;"></div>
+
+        </div>
+
+<div class="section">
+    <div class="row">
+        <div class="col-12">
+           @* <h2>Clear folders & data</h2>*@
+            <div class="d-inline-flex">
+
+                <div class="form-group d-inline-flex">
+                    <select id="company-select" class="form-control" asp-items="@((List<SelectListItem>)ViewData["Companies"])">
+                    </select>
+                </div>
+
+                <div class="form-group d-inline-flex">
+                    <select id="brand-select" class="form-control" >
+                        <option value="">Select Brand</option>
+                    </select>
+                </div>
+
+                <div class="form-group d-inline-flex">
+                    <input class="form-control" type="date" id="date" />
+                </div>
+
+                <div class="form-group d-inline-flex">
+                    <select class="form-control" id="state-select" >
+                        <option>Select State</option>
+                        <option>To Process</option>
+                        <option>For Approval</option>
+                        <option>For Rework</option>
+                        <option>Completed</option>
+                    </select>
+                </div>
+
+                <div class="form-group d-inline-flex">
+                    <select id="article-select" class="form-control" >
+                        <option value="">Select Batch</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <span id="delete-button" class="form-control btn btn-danger">Delete</span>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <br />
+
+</div>
+</div>
+</div>
+
+@section Scripts{
+    <script>
+        
+        $(document).ready(function(){
+            
+            function GetBrands(id){
+                $.ajax({
+                    url: `/Home/GetCompanyBrands?id=${id}`,
+                    method: 'GET',
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            $("#brand-select").html("");
+
+                            let emptyHTML = `<option value="">Select Brand</option>`;
+                            $("#brand-select").append(emptyHTML);
+
+                            for(let i = 0; i<data.result.length; i++){
+                                let html = `<option value="${data.result[i]}">${data.result[i]}</option>`;
+                                $("#brand-select").append(html);
+                            }
+                        }
+                    },
+                    error: function (res) {
+
+                    }
+                });
+            }
+
+            function GetArticles(id){
+                $.ajax({
+                    url: `/Home/GetCompanyArticles?id=${id}`,
+                    method: 'GET',
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            $("#article-select").html("");
+
+                            let emptyHTML = `<option value="">Select Batch</option>`;
+                            $("#article-select").append(emptyHTML);
+
+                            for(let i = 0; i<data.result.length; i++){
+                                let html = `<option value="${data.result[i]}">${data.result[i]}</option>`;
+                                $("#article-select").append(html);
+                            }
+                        }
+                    },
+                    error: function (res) {
+
+                    }
+                });
+            }
+
+            $("#company-select").on("change", function(){
+                let value = $(this).val();
+                GetBrands(value);
+                GetArticles(value);
+            });
+
+            $("#delete-button").on("click", function(){
+
+                let companyId = $("#company-select option:selected").val();
+                let brand = $("#brand-select option:selected").val();
+                let date = $("#date").val();
+                let state = $("#state-select option:selected").val();
+                let article = $("#article-select option:selected").val();
+
+                console.log(`companyId = ${companyId} brand = ${brand} date = ${date} state = ${state} article = ${article}`);
+
+                RemoveFiles(companyId, brand, date, state, article);
+            });
+
+            function RemoveFiles(companyId, brand, date, state, article){
+                let data = {
+                    companyId : companyId,
+                    brand : brand, 
+                    date : date, 
+                    state : state, 
+                    article : article
+                };
+
+                $.ajax({
+                    url: `/Home/RemoveHistory`,
+                    method: 'POST',
+                    data: data,
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            commonfs.showGeneralNotificationModal('Message', 'Deleted Successfully');
+                        }
+                    },
+                    error: function (res) {
+
+                    }
+                });
+            }
+
+        });
+
+    </script>
+}

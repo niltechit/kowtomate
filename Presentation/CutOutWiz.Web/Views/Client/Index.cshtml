@@ -1,0 +1,101 @@
+﻿@model IEnumerable<CutOutWiz.Data.Company>
+
+@{
+    ViewData["Title"] = "Clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i=1;
+}
+   <style>
+        body{
+            background-color:#f2f3f5;
+        }
+    </style>
+
+    <div class="row" style="margin-top:1%">
+
+
+    <!--Start Middle section-->
+    <div class="col-md-12" >
+        <div class="d-flex flex-row">
+        <div class="p-2">
+            <h5 style="color: #125a31;"> Client Information </h5></div>
+                       
+        <div class="p-2" >
+        <hr id="lineipad" style="width: 960px;"></div>
+
+        </div>
+ <div class="card">
+    <div class="card-header">
+        <div class="row">
+             <div class="col-md-6">
+                  <h3 style="float: left;">Client List</h3>
+            </div>
+             <div class="col-md-6">
+                  <a asp-action="Create" class="btn btn-sm btn-success" style="text-decoration: none; float: right;"><i class="bi bi-plus"></i>Create New</a>
+            </div>
+        </div>
+      
+    </div>
+    <div class="card-body">
+     <table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+               SL. NO.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+              <th>
+                @Html.DisplayName("Root Folder Path")
+            </th>
+           
+            <th>
+                Created Date
+            </th>
+          
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                #@i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.FileRootFolderPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDateUtc)
+            </td>
+             <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
+               @* @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
+            </td>
+        </tr>
+        i++;
+}
+    </tbody>
+</table>
+    </div>
+  </div>
+
+   </div>
+ </div>

@@ -1,0 +1,50 @@
+﻿@using CutOutWiz.Web.Models
+@model LoginViewModel
+
+@{
+    Layout = "_LayoutSecurity";
+    ViewData["Title"] = "Login";
+}
+
+<div class="row mt-5">    
+    <div class="col-md-4 ">
+    </div>
+    <div class="col-md-4 center mt-3 p-5 ">  
+        <div class="mb-4 d-flex justify-content-center">
+              <img src="/img/logo-text-new.png" alt="Cutoutwiz Logo" />
+        </div>
+    
+    @* <h2 class="">Login</h2> *@
+        <form action="/Account/Login" method="post"> 
+            <div class="form-group m-1 pb-2">      
+                Welcome to Image Approval Tool!
+            </div> 
+
+            <div class="form-group m-1 pb-2">      
+                <input asp-for="UserName"  type="text" placeholder="Username" class="form-control" required/>                 
+            </div>    
+            <div class="form-group m-1 pb-2">                     
+                <input type="password" asp-for="Password"  placeholder="Password" class="form-control" required/>                  
+            </div>  
+            <div class="form-group m-1">    
+                <input type="checkbox" value="true"  name="RememberMe" /> Remember me 
+                 <input name="RememberMe" type="hidden" value="false" />
+            </div>  
+            
+            <div class="form-group m-1">    
+                <input type="submit" value="Login" class="btn btn-success" />    
+            </div>   
+            
+            @if (!string.IsNullOrEmpty(Model?.ErrorMessage))    
+            {    
+                <span class="text-danger">    
+                    @Model.ErrorMessage  
+                </span>    
+            }  
+
+        </form>    
+    </div> 
+    <div class="col-md-4">
+
+    </div>
+</div>     

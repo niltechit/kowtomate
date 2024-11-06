@@ -1,0 +1,149 @@
+﻿ @section Styles {
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.38.0/skin-lion/ui.fancytree.min.css">
+<link rel="stylesheet" href="~/css/js-slider.css"/>
+
+<style type="text/css">
+     .carousel-indicators [data-bs-target] {
+    box-sizing: content-box;
+    flex: 0 1 auto;
+    width: 95px;
+    height: 95px;
+    padding: 0;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: unset !important;
+    cursor: pointer;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 0;
+   /* border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;*/
+    opacity: .9;
+    transition: opacity .6s ease;
+}
+
+.carousel-indicators
+{
+    margin-left:0px;
+    margin-right:0px;
+    display: -webkit-box;
+}
+.carousel-control-next, .carousel-control-prev {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8px;
+    width: none;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    background: 0 0;
+    border: 0;
+    opacity: .5;
+    transition: opacity .15s ease;
+}
+
+/*.carousel-indicators
+{
+   bottom: -133px !important;
+}*/
+</style>
+}
+
+<div class="row">
+   <!--Start Middle section-->
+   <div class="col-md-9" style="margin-top: 2%;">
+      <div class="d-flex flex-row">
+         <div class="p-2">
+            <h6 class="folder-name"> Folder </h6>
+         </div>
+         <div class="p-2"> <input type="checkbox" id="selectallimage" class="select-all-img"/></div>
+         <div class="p-2" style="margin-top: -1%;">
+            <hr style="width: 100px;">
+         </div>
+         <div class="p-2" style="margin-top: -1%;">     
+             <a title ="Small View" href="small-view" class="btn-change-view"><i class="bi bi-grid-3x3-gap"></i></a>
+                <a title="Large View" href="large-view" class="btn-change-view"><i class="bi bi-grid"></i></a>
+                <a title="Gallery View" href="gallery-view" class="btn-change-view"><i class="bi bi-file-easel"></i></a>
+                @* <a title="Fullscreen" href="full-screen-view" class="btn-change-view"><i class="bi bi-arrows-fullscreen"></i></a>*@                        
+                          @* <a title="" href="list-view" class="btn-change-view"><i class="bi bi-list-ul"></i></a>*@                                                   
+         </div>          
+      </div>
+      <div class="row" id="image-container">                                
+         <!-- graceful-european-women-winter-far-coat-stylish-dress -->
+         <p class="browse-instruction">Browse your image directories in left panel</p>
+      </div>
+   </div>
+   <!--End Middle section-->
+   <!--Start right section-->
+   <div class="col-md-3"style="margin-top: 2%;">
+      <div class="card">
+         <div class="card-body comment-body" style="display:none;">
+            <h4 class="card-title">Feedback</h4>
+           @* <select id="inputState" class="form-control"name="option">
+               <option selected> --Image Name-- </option>
+               <option>Image Name1</option>
+               <option>Image Name2</option>
+               <option>Image Name3</option>
+            </select>
+            <br><br>*@
+          
+            <div class="form-group">
+                @*<label for="comment"style="color: #125a31;font-weight: 600">Feedback</label>*@
+                <textarea class="form-control"placeholder="Write your instruction here" name="comment" id="comment" rows="5"></textarea>
+            </div>
+            <br>
+            <div class="form-group">
+               @* <label for="exampleFormControlFile1"> Attachments(Optional) </label>
+                <input style="background-color:#eef5f9"type="file" class="form-control-file" id="exampleFormControlFile1">*@
+                <h4>File Info</h4>                            
+                <p class="file-info-line"><strong>Name:</strong><span class="sel-file-name"></span></p>
+               @* <p> Item Type: <span class="sel-file-name"></span></p>*@
+                @*<p> Uploaded by: <span class="sel-file-name"></span></p>*@
+                <p class="file-info-line"><strong>Updated&nbspOn:</strong> <span class="sel-file-date"></span></p>
+               @* <p> Dimension:</p>*@
+                <p class="file-info-line"><strong>Size:</strong><span class="sel-file-size"></span></p>
+            </div>
+           
+
+            <div class="row">
+               <div class="col-6 col-md-6">
+                  <button id="appr" class="btnAccept action-btn">Approve</button> 
+               </div>
+               <div class="col-6 col-md-6">
+                  <button id="rej" class="btnReject action-btn ml-2">Reject</button>
+               </div>
+            </div>
+
+              <div class="row mt-4">                                                      
+                                     
+                <a href="small-view" title="Small View" class="btn-change-view col-4"><i class="bi bi-grid-3x3-gap fa-2x"></i></a>
+                <a href="large-view" title="Large View" class="btn-change-view col-4"><i class="bi bi-4x bi-grid fa-2x"></i></a>
+                   <a href="gallery-view" title="Gallery View" class="btn-change-view col-4"><i class="bi bi-file-easel fa-2x"></i></a>  
+                @* <a href="full-screen-view" class="btn-change-view"><i class="bi bi-arrows-fullscreen"></i>  Full Screen</a>*@                                                   
+                @* <a href="list-view" class="btn-change-view"><i class="bi bi-list-ul"></i>  List</a>*@                                                   
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+ <partial name="_ImagePreview">
+
+ @section Scripts {
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.38.0/jquery.fancytree-all.min.js"></script>
+   @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.38.0/jquery.fancytree-all-deps.min.js"></script>*@
+   @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.38.0/jquery.fancytree.min.js"></script>*@
+
+   <script src='https://cdn.jsdelivr.net/npm/jquery-anyimagecomparisonslider-plugin'></script>
+   <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+   <script src="~/lib/image-compare/image-comparer.js"></script>
+   <script src="~/js/drive/drive-manager.js" asp-append-version="true"></script>  
+   <script src="~/lib/image-edit/paint.js" asp-append-version="true"></script>
+   <script src="~/js/js-slider.js"></script>
+}

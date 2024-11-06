@@ -1,0 +1,108 @@
+﻿@model CutOutWiz.Data.UserModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<hr />
+ <div class="card">
+    <div class="card-header">
+        <div class="row">
+             <div class="col-md-6">
+                  <h3 style="float: left;">Create User</h3>
+            </div>
+             <div class="col-md-6">
+                  <a asp-action="UserList" class="btn btn-sm btn-success" style="text-decoration: none; float: right;"><i class="bi bi-arrow-left"></i> Back to Userlist</a>
+            </div>
+        </div>
+      
+    </div>
+    <div class="card-body">
+          <form asp-action="Create">
+<div class="row">
+  
+    <div class="col-md-4">    
+            <div class="form-group mt-2">
+                <label  class="control-label">First Name</label>
+                <input  class="form-control" type="text" name ="firstname" placeholder="Enter First name.." />
+            </div>
+
+             <div class="form-group mt-2">
+                <label  class="control-label">Last Name</label>
+                <input  class="form-control" type="text" name ="lastname" placeholder="Enter Last name.." />
+            </div>
+            <div class="form-group mt-2">
+                <label  class="control-label">User Name</label>
+                <input name="username" class="form-control" placeholder="Enter User name.."/>
+                
+            </div>
+             <div class="form-group mt-2">
+                <label  class="control-label">Email Address</label>
+                <input  class="form-control" type="email" name ="email" placeholder="Enter Email Address.." />
+            </div>
+             <div class="form-group mt-2">
+                <label  class="control-label">Phone Number</label>
+                <input  class="form-control" type="text" name ="phone" placeholder="Enter Phone no.." />
+            </div>
+   
+
+            <div class="form-group mt-2">
+                <input type="submit" value=" Create " class="btn btn-success btn-block mb-3" />
+            </div>
+             @if (!string.IsNullOrEmpty(ViewBag.Message))    
+            {    
+                <span class="text-danger">    
+                   <div class="bg-danger text-white p-1 m-1"> @ViewBag.Message </div> 
+                </span>    
+            } 
+     
+    </div>
+    <div class="col-md-4">
+                 <div class="form-group mt-2">
+              <label  class="control-label">Select Role Name</label>
+              <select name="role" id="role" class="form-control">
+                 <option value="0">-Select Role-</option>
+                     @foreach (var item in ViewBag.roles)
+                      {
+                          <option value="@item.Id">@item.Name</option>
+                      }
+               </select>
+            </div>
+             <div class="form-group mt-2">
+              <label  class="control-label">Select Company</label>
+              <select name="company" id="company" class="form-control">
+                   <option value="0">-Select Company-</option>
+                      @foreach (var item in ViewBag.companies)
+                      {
+                           <option value="@item.Id">@item.Name</option>
+                      }
+
+               </select>
+            </div>
+            <div class="form-group mt-2">
+                <label  class="control-label">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Enter Password.."/>
+            </div>
+            <div class="form-group mt-2">
+                <label  class="control-label">Confirm Password</label>
+                <input class="form-control" type="password" name="confirm-password" placeholder="Enter Confirm Password.." />
+            </div>
+    </div>
+   
+</div>
+ </form>
+    </div>
+  </div>
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
