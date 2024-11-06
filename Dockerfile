@@ -4,7 +4,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 80
+EXPOSE 8080
 EXPOSE 443
 
 
