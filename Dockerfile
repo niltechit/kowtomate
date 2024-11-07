@@ -3,7 +3,8 @@
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 8080 # kowtomate app
+EXPOSE 8080 
+# kowtomate app
 
 
 # This stage is used to build the service project
