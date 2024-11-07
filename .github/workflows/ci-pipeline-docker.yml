@@ -43,4 +43,4 @@ jobs:
           context: .  # Set the context to the root of the repository
           file: ./Dockerfile  # Path to your Dockerfile at the base of the repository
           push: true
-          tags: zakircmt47/test-repo:latest, zakircmt47/test-repo:${{ github.run_number }}
+          tags: zakircmt47/kowtomate-app-dev-ubuntu:latest, zakircmt47/kowtomate-app-dev-ubuntu:v-0.0.${{ github.run_number }}
