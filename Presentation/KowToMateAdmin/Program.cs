@@ -103,7 +103,7 @@ app.UseHttpsRedirection();
 //app.UseResponseCompression();
 app.UseStaticFiles();
 // Use Fast Report Dependency
-//app.UseFastReport();
+app.UseFastReport();
 app.UseRouting();
 
 app.MapDefaultControllerRoute();

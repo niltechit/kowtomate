@@ -370,10 +370,9 @@ namespace KowToMateAdmin.Pages.OrderUpload
             SetFileCountStatusWiseForFolderView();
            
 
-            if (loginUser.CompanyType == (int)CompanyType.Client)
-            {
-                await PopulateMissingRawFiles();
-            }
+           
+           await PopulateMissingRawFiles();
+           
 
             StateHasChanged();
 
@@ -1013,9 +1012,6 @@ namespace KowToMateAdmin.Pages.OrderUpload
             isShowProductionDoneImagePopup = true;
             isShowImagePopup = false;
             spinShow = true;
-            this.StateHasChanged();
-
-
             isCompletedBtnClicked = true;
             if (isCompletedBtnClicked)
             {
@@ -1026,6 +1022,16 @@ namespace KowToMateAdmin.Pages.OrderUpload
                 isCompletedBtnClicked = false;
 
             }
+
+            if (clientOrderItem.InternalFileOutputPath == null)
+            {
+                spinShow = false;
+                this.StateHasChanged();
+                return;
+            }
+            this.StateHasChanged();
+
+           
             spinShow = false;
             StateHasChanged();
 

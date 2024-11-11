@@ -111,8 +111,8 @@
                 @*<span>(@filteredStandardServices.Count)</span>*@
             </h4>
             <div class="">
-               @*  <div class="row">
-                    <h4 class="mb-sm-0 font-size-18">File Upload Time: @timer.elapsedTime</h4>
+                @*  <div class="row">
+                <h4 class="mb-sm-0 font-size-18">File Upload Time: @timer.elapsedTime</h4>
                 </div> *@
             </div>
             <div class="page-title-right">
@@ -860,7 +860,7 @@
 
                                                 @if (loginUser.CompanyType == (int)CompanyType.Admin)
                                                 {
-                                                    <RadzenDataGridColumn TItem="ClientOrderItemModel" OrderIndex=3 Property="ProductionFileByteString" Title="Prod Done Img" TextAlign="TextAlign.Center" Filterable="false" Frozen="true">
+                                                    <RadzenDataGridColumn TItem="ClientOrderItemModel" OrderIndex=3 Property="ProductionFileByteString" Title="Processed Image" TextAlign="TextAlign.Center" Filterable="false" Frozen="true">
                                                         <Template Context="order">
                                                             @if (order.Status >= (int)InternalOrderItemStatus.ProductionDone)
                                                             {
@@ -916,9 +916,9 @@
                                                         <Template Context="order">
                                                             @if (order.ExternalStatus == (int)ExternalOrderItemStatus.ReadyToDownload || order.ExternalStatus == (int)ExternalOrderItemStatus.Completed)
                                                             {
-                                                               @*  <div>
-                                                                    <img height="100px" width="100px" @ondblclick="(e)=>ShowProductionDoneImagePopup(order)" src="@fileServer.RootFolder/@order.InternalFileOutputPath?width=200">
-                                                                </div> *@
+                                                                @*  <div>
+                                                <img height="100px" width="100px" @ondblclick="(e)=>ShowProductionDoneImagePopup(order)" src="@fileServer.RootFolder/@order.InternalFileOutputPath?width=200">
+                                                </div> *@
                                                                 @if (order.InternalFileOutputPath != null)
                                                                 {
                                                                     string imageUrl = GetCachedImageUrl(order.InternalFileOutputPath);
@@ -967,21 +967,21 @@
 
                                                 </RadzenDataGridColumn>
                                             }
-                                          
+
                                             @if (loginUser.CompanyType == (int)CompanyType.Admin)
                                             {
-                                                 <RadzenDataGridColumn TItem="ClientOrderItemModel" OrderIndex=9 Property="FileSize" Title="Size" TextAlign="TextAlign.Center" Filterable="false">
-                                                <Template Context="order">
-                                                    @if (order.FileSize <= 0 || order.FileSize == null)
-                                                    {
-                                                        <span>N/A</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span>@(_genericService.GetSizeStringToHumanReadable(order.FileSize)) </span>
-                                                    }
-                                                </Template>
-                                            </RadzenDataGridColumn>
+                                                <RadzenDataGridColumn TItem="ClientOrderItemModel" OrderIndex=9 Property="FileSize" Title="Size" TextAlign="TextAlign.Center" Filterable="false">
+                                                    <Template Context="order">
+                                                        @if (order.FileSize <= 0 || order.FileSize == null)
+                                                        {
+                                                            <span>N/A</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>@(_genericService.GetSizeStringToHumanReadable(order.FileSize)) </span>
+                                                        }
+                                                    </Template>
+                                                </RadzenDataGridColumn>
                                                 <RadzenDataGridColumn TItem="ClientOrderItemModel" OrderIndex=10 Property="TeamName" Title="Team Name" TextAlign="TextAlign.Center" Filterable="false">
                                                     <Template Context="order">
                                                         @if (string.IsNullOrEmpty(order.TeamName))
@@ -1111,44 +1111,44 @@
                                                 {
                                                     if (folder.IsFileParentFolder)
                                                     {
-                                                        var parentFolderContainFilePathUrl = GetCachedImageUrl(folder.ParentFolderContainFilePath,80,80);
-                                                         <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 mb-3">
-                                                       <div class="folder-container @isSelectedClass" @onclick="async (args) => await OnClickTitle(args, folder)" @ondblclick=@(async () => await LoadSubFoldersAndFiles(folder.Prefix + "/" + folder.FolderName))>
-                                                              <div class="folderParrent">
-                                                                <h4>@folder.FolderName</h4>
-                                                                <div class="folder">
-                                                                    <div class="folder-icon-wrap">
+                                                        var parentFolderContainFilePathUrl = GetCachedImageUrl(folder.ParentFolderContainFilePath, 80, 80);
+                                                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 mb-3">
+                                                            <div class="folder-container @isSelectedClass" @onclick="async (args) => await OnClickTitle(args, folder)" @ondblclick=@(async () => await LoadSubFoldersAndFiles(folder.Prefix + "/" + folder.FolderName))>
+                                                                <div class="folderParrent">
+                                                                    <h4>@folder.FolderName</h4>
+                                                                    <div class="folder">
+                                                                        <div class="folder-icon-wrap">
                                                                             <img class="folder-icon" src="./assets/images/foldericon.svg" />
-                                                                        <div>
+                                                                            <div>
                                                                                 <img src="@parentFolderContainFilePathUrl" alt="Folder Image" class="folder-image" />
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
 
-                                                                    <div class="folder-info-wrap">
-                                                                        <div class="folder-info">
+                                                                        <div class="folder-info-wrap">
+                                                                            <div class="folder-info">
                                                                                 <span style="font-weight:bold">@folder.ParentFolderContainFileCount Files</span>
-                                                                        </div>
-                                                                        <div class="folder-info">
-                                                                             <span class="folder-status">
-                                                                                @((InternalOrderItemStatus)folder.FolderMinStatus != 0 ? $"{(InternalOrderItemStatus)folder.FolderMinStatus}" : "N/A")
-                                                                            </span>
+                                                                            </div>
+                                                                            <div class="folder-info">
+                                                                                <span class="folder-status">
+                                                                                    @((InternalOrderItemStatus)folder.FolderMinStatus != 0 ? $"{(InternalOrderItemStatus)folder.FolderMinStatus}" : "N/A")
+                                                                                </span>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     }
                                                     else
                                                     {
-                                                         <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 mb-3">
-                                                        <div class="@isSelectedClass" @onclick="async (args) => await OnClickTitle(args, folder)" @ondblclick=@(async () => await LoadSubFoldersAndFiles(folder.Prefix + "/" + folder.FolderName))>
-                                                            <i class="fas fa-folder"></i> @folder.FolderName
-                                                            <span style="color:green;font-weight:bold;margin-left:12%">
-                                                                @((InternalOrderItemStatus)folder.FolderMinStatus != 0 ? $"{(InternalOrderItemStatus)folder.FolderMinStatus}" : "N/A")
-                                                            </span>
+                                                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 mb-3">
+                                                            <div class="@isSelectedClass" @onclick="async (args) => await OnClickTitle(args, folder)" @ondblclick=@(async () => await LoadSubFoldersAndFiles(folder.Prefix + "/" + folder.FolderName))>
+                                                                <i class="fas fa-folder"></i> @folder.FolderName
+                                                                <span style="color:green;font-weight:bold;margin-left:12%">
+                                                                    @((InternalOrderItemStatus)folder.FolderMinStatus != 0 ? $"{(InternalOrderItemStatus)folder.FolderMinStatus}" : "N/A")
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     }
                                                 }
 
@@ -1250,7 +1250,7 @@
                                                                         {
                                                                             <td>@((ExternalOrderItemStatus)file.ExternalStatus)</td>
                                                                         }
-                                                                        
+
                                                                         @if (loginUser.CompanyType == (int)CompanyType.Admin)
                                                                         {
                                                                             <td>@((OrderItemFileGroup)file.FileGroup)</td>
@@ -1341,7 +1341,7 @@
                                                                             }
                                                                             @if (loginUser.CompanyType == (int)CompanyType.Admin)
                                                                             {
-                                                                               if (string.IsNullOrEmpty(@file.EditorName))
+                                                                                if (string.IsNullOrEmpty(@file.EditorName))
                                                                                 {
                                                                                     <p>N/A</p>
                                                                                 }
@@ -1402,14 +1402,14 @@
                             </div>
                         </div>
 
-                       @if (loginUser.CompanyType == (int)CompanyType.Admin)
+                        @if (loginUser.CompanyType == (int)CompanyType.Admin)
                         {
                             var results = clientOrderItems.Where(x => x.Status != null && x.FileGroup == (int)OrderItemFileGroup.Work
-                            && (x.InternalFileInputPath !=null || x.InternalFileOutputPath != null || x.ProductionDoneFilePath!=null))
-                            .GroupBy(x => x.Status).Select(gcs => new { Status = gcs.Key, count = gcs.Count()});
+                            && (x.InternalFileInputPath != null || x.InternalFileOutputPath != null || x.ProductionDoneFilePath != null))
+                            .GroupBy(x => x.Status).Select(gcs => new { Status = gcs.Key, count = gcs.Count() });
 
 
-                           
+
 
                             <div class="row" style="margin-top:10px">
                                 <div class="col-lg-4 col-sm-6 col-md-6"></div>
@@ -1440,33 +1440,33 @@
                         }
                         @* else
                         {
-                            var results = clientOrderItems.GroupBy(x => x.ExternalStatus).Select(gcs => new { Status = gcs.Key, count = gcs.Count() });
-                            <div class="row" style="margin-top:10px">
-                                <div class="col-lg-4 col-sm-6 col-md-6"></div>
+                        var results = clientOrderItems.GroupBy(x => x.ExternalStatus).Select(gcs => new { Status = gcs.Key, count = gcs.Count() });
+                        <div class="row" style="margin-top:10px">
+                        <div class="col-lg-4 col-sm-6 col-md-6"></div>
 
-                                <div class="col-lg-4 col-sm-6 col-md-6" style="overflow:auto">
-                                    <table class="table table-bordered border-primary">
-                                        @if (results.Count() > 0)
-                                        {
-                                            <thead>
-                                                <tr>
-                                                    <th>Status</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
-                                        }
-                                        <tbody>
-                                            @foreach (var item in results)
-                                            {
-                                                <tr>
-                                                    <td>@((ExternalOrderItemStatus)item.Status)</td>
-                                                    <td>@item.count</td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div class="col-lg-4 col-sm-6 col-md-6" style="overflow:auto">
+                        <table class="table table-bordered border-primary">
+                        @if (results.Count() > 0)
+                        {
+                        <thead>
+                        <tr>
+                        <th>Status</th>
+                        <th>Total</th>
+                        </tr>
+                        </thead>
+                        }
+                        <tbody>
+                        @foreach (var item in results)
+                        {
+                        <tr>
+                        <td>@((ExternalOrderItemStatus)item.Status)</td>
+                        <td>@item.count</td>
+                        </tr>
+                        }
+                        </tbody>
+                        </table>
+                        </div>
+                        </div>
                         }  *@
 
                     </div>
@@ -1560,9 +1560,9 @@
                                                         if (order.Status >= (int)InternalOrderItemStatus.ReadyToDeliver)
                                                         {
 
-                                                           @*  <div>
-                                                                <img height="100px" width="100px" @ondblclick="(e)=>ShowProductionDoneImagePopup(order)" src="@fileServer.RootFolder/@order.InternalFileOutputPath?width=200">
-                                                            </div> *@
+                                                            @*  <div>
+                                        <img height="100px" width="100px" @ondblclick="(e)=>ShowProductionDoneImagePopup(order)" src="@fileServer.RootFolder/@order.InternalFileOutputPath?width=200">
+                                        </div> *@
 
 
                                                             @if (order.InternalFileInputPath != null)
@@ -1585,8 +1585,8 @@
                                                         else
                                                         {
                                                             @* <div>
-                                                                <img height="100px" width="100px" @ondblclick="(e)=>ShowProductionDoneImagePopup(order)" src="@fileServer.RootFolder/@order.ProductionDoneFilePath?width=200">
-                                                            </div> *@
+                                        <img height="100px" width="100px" @ondblclick="(e)=>ShowProductionDoneImagePopup(order)" src="@fileServer.RootFolder/@order.ProductionDoneFilePath?width=200">
+                                        </div> *@
 
                                                             @if (order.InternalFileInputPath != null)
                                                             {
@@ -1678,7 +1678,7 @@
                                                 <div>
 
                                                     @* <img height="100px" width="100px" @ondblclick="(e)=>ShowImagePopup((int)order.Id)" src="@fileServer.RootFolder/@order.InternalFileInputPath?width=100">
- *@
+                                            *@
 
                                                     @if (order.InternalFileInputPath != null)
                                                     {
@@ -1750,8 +1750,8 @@
                                             </Template>
                                         </RadzenDataGridColumn>
                                     }
-                                    
-                                   
+
+
                                     @if (loginUser.CompanyType == (int)CompanyType.Admin)
                                     {
                                         <RadzenDataGridColumn TItem="ClientOrderItemModel" Property="FileSize" Title="Size" TextAlign="TextAlign.Center" Filterable="false" OrderIndex="10">
@@ -1942,16 +1942,16 @@
                                                 @if (loginUser.CompanyType == (int)CompanyType.Admin)
                                                 {
                                                     <RadzenDataGridColumn TItem="ClientOrderItemModel" Property="FileSize" Title="Size" Width="70px">
-                                                    <Template Context="orderItem">
-                                                        @if (orderItem.FileSize <= 0 || orderItem.FileSize == null)
-                                                        {
-                                                            <span>N/A</span>
-                                                        }
-                                                        else
-                                                        {
-                                                            <span>@(orderItem.FileSize * 0.001) KB</span>
-                                                        }
-                                                    </Template>
+                                                        <Template Context="orderItem">
+                                                            @if (orderItem.FileSize <= 0 || orderItem.FileSize == null)
+                                                            {
+                                                                <span>N/A</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span>@(orderItem.FileSize * 0.001) KB</span>
+                                                            }
+                                                        </Template>
                                                     </RadzenDataGridColumn>
                                                     <RadzenDataGridColumn TItem="ClientOrderItemModel" Property="Status" Title="Status" TextAlign="TextAlign.Center">
 
@@ -2188,27 +2188,33 @@
 
                             </div>
                             <div class="mt-3">
-                                @if (@clientOrderItem.Status >= (byte)InternalOrderItemStatus.ReadyToDeliver)
-                                {
-                                    <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>ShowImagePopup((int)clientOrderItem.Id)" disabled="@isRawBtnClicked"><span class="fas fa-angle-double-left"></span> Raw </button>
-                                }
+                                @* @if (@clientOrderItem.Status >= (byte)InternalOrderItemStatus.ReadyToDeliver)
+                            {
+                            <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>ShowImagePopup((int)clientOrderItem.Id)" disabled="@isRawBtnClicked"><span class="fas fa-angle-double-left"></span> Raw </button>
+                            } *@
 
-                                @if (authState.User.IsInRole(PermissionConstants.OrderItem_CanApprovedByQC))
+                                @* @if (authState.User.IsInRole(PermissionConstants.OrderItem_CanApprovedByQC))
+                            {
+                            <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>UpdateOrderItemByQc(InternalOrderItemStatus.ReadyToDeliver,(int)clientOrderItem.Id)"><span class="fas fa-solid fa-check"></span> Approve</button>
+                            <button class="btn btn-sm btn-danger btn-space" @onclick="(e)=>Reject(InternalOrderItemStatus.ReworkDistributed,(int)clientOrderItem.Id)"><span class="fas fa-ban"></span> Reject</button>
+                            <button type="button" class="btn btn-sm btn btn-secondary btn-space" data-bs-dismiss="modal" disabled="@isSubmitting" @onclick="CloseImagePopup">Close</button>
+                            }
+                            else
+                            {
+                            if (@clientOrderItem.Status >= (byte)InternalOrderItemStatus.ReadyToDeliver)
+                            {
+                            <button class="btn btn-sm btn-secondary btn-space" @onclick="(e)=>PreviousImageShow(clientOrderItem)"><span class="fas fa-angle-double-left"></span> Previous</button>
+                            <button type="button" class="btn btn-sm btn btn-secondary btn-space" data-bs-dismiss="modal" disabled="@isSubmitting" @onclick="CloseImagePopup">Close</button>
+                            <button type="button" class="btn btn-sm btn btn-secondary btn-space" data-bs-dismiss="modal" disabled="@isSubmitting" @onclick="(e)=>NextImageShow(clientOrderItem)">Next <span class="fas fa-angle-double-right"></span></button>
+                            <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>ShowProductionDoneImagePopup(clientOrderItem)" disabled="@isCompletedBtnClicked"><span class="fas fa-angle-double-left"></span> Completed </button>
+                            }
+                            }
+                            *@
+                                @if (@clientOrderItem.Status >= (byte)InternalOrderItemStatus.ProductionDone)
                                 {
-                                    <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>UpdateOrderItemByQc(InternalOrderItemStatus.ReadyToDeliver,(int)clientOrderItem.Id)"><span class="fas fa-solid fa-check"></span> Approve</button>
-                                    <button class="btn btn-sm btn-danger btn-space" @onclick="(e)=>Reject(InternalOrderItemStatus.ReworkDistributed,(int)clientOrderItem.Id)"><span class="fas fa-ban"></span> Reject</button>
-                                    <button type="button" class="btn btn-sm btn btn-secondary btn-space" data-bs-dismiss="modal" disabled="@isSubmitting" @onclick="CloseImagePopup">Close</button>
+                                    <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>ShowProductionDoneImagePopup(clientOrderItem)" disabled="@isCompletedBtnClicked"><span></span> Completed </button>
                                 }
-                                else
-                                {
-                                    if (@clientOrderItem.Status >= (byte)InternalOrderItemStatus.ReadyToDeliver)
-                                    {
-                                        <button class="btn btn-sm btn-secondary btn-space" @onclick="(e)=>PreviousImageShow(clientOrderItem)"><span class="fas fa-angle-double-left"></span> Previous</button>
-                                        @*<button type="button" class="btn btn-sm btn btn-secondary btn-space" data-bs-dismiss="modal" disabled="@isSubmitting" @onclick="CloseImagePopup">Close</button>*@
-                                        <button type="button" class="btn btn-sm btn btn-secondary btn-space" data-bs-dismiss="modal" disabled="@isSubmitting" @onclick="(e)=>NextImageShow(clientOrderItem)">Next <span class="fas fa-angle-double-right"></span></button>
-                                        <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>ShowProductionDoneImagePopup(clientOrderItem)" disabled="@isCompletedBtnClicked"><span class="fas fa-angle-double-left"></span> Completed </button>
-                                    }
-                                }
+                                <button type="button" class="btn btn-sm btn btn-secondary btn-space" data-bs-dismiss="modal" disabled="@isSubmitting" @onclick="CloseImagePopup">Close</button>
                             </div>
                         </div>
                     </div>
@@ -2459,8 +2465,10 @@
                         {
                             @if (!string.IsNullOrEmpty(clientOrderItem.ProductionDoneFilePath))
                             {
+                                string imageUrl = GetCachedImageUrl(clientOrderItem.ProductionDoneFilePath);
                                 <div class="">
-                                    <img src="@fileServer.RootFolder/@clientOrderItem.ProductionDoneFilePath?width=600" />
+                                    <img src="@imageUrl" />
+                                    @* <img src="@fileServer.RootFolder/@clientOrderItem.ProductionDoneFilePath?width=600" /> *@
                                 </div>
                             }
                             else
@@ -2472,7 +2480,7 @@
                         }
                         <div class="mt-3">
 
-                            <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>ShowImagePopup((int)clientOrderItem.Id)" disabled="@isRawBtnClicked"><span class="fas fa-angle-double-left"></span> Raw</button>
+                            <button class="btn btn-sm btn-success btn-space" @onclick="(e)=>ShowImagePopup((int)clientOrderItem.Id)" disabled="@isRawBtnClicked"><span></span> Raw</button>
 
                             @if (loginUser.CompanyType == (int)CompanyType.Admin)
                             {
@@ -3033,38 +3041,7 @@
         }
     }
 
-    //private Dictionary<string, string> imageCache = new Dictionary<string, string>();
-    //private Dictionary<string, bool> loadingImages = new Dictionary<string, bool>();
-
-    // private string GetCachedImageUrl(string internalFileInputPath)
-    // {
-    //     if(internalFileInputPath != null)
-    //     {
-    //         if (!imageCache.TryGetValue(internalFileInputPath, out var imageUrl) || string.IsNullOrEmpty(imageUrl))
-    //         {
-    //             if (!loadingImages.ContainsKey(internalFileInputPath))
-    //             {
-    //                 loadingImages[internalFileInputPath] = true;
-
-    //                 Task.Run(() =>
-    //                 {
-    //                     var loadedUrl = _fileViewApiService.ConvertedFileAndGetOutputUrl(internalFileInputPath);
-    //                     imageCache[internalFileInputPath] = loadedUrl;
-    //                     loadingImages[internalFileInputPath] = false;
-    //                     InvokeAsync(StateHasChanged);
-    //                 });
-    //             }
-    //             return "";
-    //         }
-
-    //         return imageUrl;
-    //     }
-
-    //     return "";
-
-    // }
-
-    private string GetCachedImageUrl(string internalFileInputPath,int width=500,int height=500)
+    private string GetCachedImageUrl(string internalFileInputPath, int width = 500, int height = 500)
     {
         if (string.IsNullOrEmpty(internalFileInputPath))
             return "";
